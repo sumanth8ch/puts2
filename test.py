@@ -19,6 +19,7 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(b'1.6666666666666667 \n', rv.data)
         def test_addneg(self):
             rv =  self.app.get('/add?A=2.3&B=-3.3')
+            self.assertEqual(b'-1 \n', rv.data)
 
         def test_subint(self):
             rv =  self.app.get('/sub?A=2&B=5')
@@ -32,7 +33,21 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(b'-0.3333333333333333 \n', rv.data)
         def test_subneg(self):
             rv =  self.app.get('/sub?A=2.3&B=-3.3')
-            self.assertEqual(b'5.6 \n', rv.data)    
+            self.assertEqual(b'5.6 \n', rv.data)
+
+        def test_mulint(self):
+            rv =  self.app.get('/mul?A=2&B=5')
+            self.assertEqual(b'10 \n', rv.data)
+            self.assertNotEqual(b'6.000 \n',rv.data)
+        def test_mulfloat(self):
+            rv =  self.app.get('/mul?A=2.3&B=3.3')
+            self.assertEqual(b'7.59 \n', rv.data)
+        def test_mulfrac(self):
+            rv =  self.app.get('/mul?A=2/3&B=3/3')
+            self.assertEqual(b'0.6666666666666666 \n', rv.data)
+        def test_mulneg(self):
+            rv =  self.app.get('/mul?A=2.3&B=-3.3')
+            self.assertEqual(b'-7.59 \n', rv.data)
 
 if __name__ == '__main__':
     unittest.main()
