@@ -48,7 +48,20 @@ class MyTestCase(unittest.TestCase):
         def test_mulneg(self):
             rv =  self.app.get('/mul?A=2.3&B=-3.3')
             self.assertEqual(b'-7.59 \n', rv.data)
-
+        
+        def test_divint(self):
+            rv =  self.app.get('/mul?A=2&B=5')
+            self.assertEqual(b'0.0392156862745098 \n', rv.data)
+            self.assertNotEqual(b'0.0256 \n',rv.data)
+        def test_divfloat(self):
+            rv =  self.app.get('/mul?A=2.3&B=3.3')
+            self.assertEqual(b'0.696969696969697 \n', rv.data)
+        def test_divfrac(self):
+            rv =  self.app.get('/mul?A=2/3&B=3/3')
+            self.assertEqual(b'0.6666666666666666 \n', rv.data)
+        def test_divneg(self):
+            rv =  self.app.get('/mul?A=2.3&B=-3.3')
+            self.assertEqual(b'-0.696969696969697 \n', rv.data) 
 
 if __name__ == '__main__':
     unittest.main()
