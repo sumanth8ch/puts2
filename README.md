@@ -8,9 +8,10 @@ First run the main.py script on command line using:
 --------> python main.py
 Then it will present us with an url showing ip address and port on which the application is running.
 Copy that and paste in a web browser and usage should be as shown:
-------> url/Operation?A=?/B=? give us the result.
+------> url/Operation?A=?/B=? give us the result rounded upto 3 decimal places.
 For example to perform multiplication
 -------> http://127.0.0.1:5000/mul?A=2/5&B=3
+Note: If the input has some zero division error, the output will be none.
 
 To perform the test runs, run the test.py file using the command:
 -------> python test.py (NOTE: while running the test.py, you should be in the same directory as that of main.py)
